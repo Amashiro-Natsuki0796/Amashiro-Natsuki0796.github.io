@@ -1,0 +1,809 @@
+/* ==================== 头像旋转动画设置 ==================== */
+
+/* 头像图片基本样式设置 */
+.avatar-img img {
+  /* 图片渲染优化 - 提高图像对比度和清晰度 */
+  image-rendering: -webkit-optimize-contrast;  /* Webkit内核浏览器优化对比度 */
+  image-rendering: crisp-edges;                /* 优化边缘清晰度 */
+  image-rendering: -moz-crisp-edges;           /* Firefox优化边缘清晰度 */
+  image-rendering: -o-crisp-edges;             /* Opera优化边缘清晰度 */
+  
+  /* 3D变换优化 - 提高渲染性能 */
+  -webkit-backface-visibility: hidden;         /* Webkit隐藏背面 */
+  backface-visibility: hidden;                 /* 隐藏背面 */
+  -webkit-transform: translateZ(0);             /* Webkit启用硬件加速 */
+  transform: translateZ(0);                     /* 启用硬件加速 */
+  
+  /* 头像圆形样式 */
+  border-radius: 50%;                          /* 圆形边框 */
+  
+  /* 旋转动画过渡效果 - 控制旋转时的平滑过渡 */
+  transition: transform 0.3s ease;             /* 0.3秒内平滑过渡旋转效果 */
+}
+
+/* 头像整体动画设置 */
+.avatar-img {
+   /* 自定义旋转动画 - 覆盖主题默认的旋转动画，使用自定义速度 */
+   /* 动画参数：customAvatarRotate(动画名称) 4s(持续时间) linear(匀速) infinite(无限循环) */
+   animation: customAvatarRotate 4s linear infinite !important;
+}
+
+/* 定义旋转动画关键帧 - 从0度转到360度实现完整旋转 */
+@keyframes customAvatarRotate {
+  from {
+    transform: rotate(0deg);                   /* 从0度开始旋转 */
+  }
+  to {
+    transform: rotate(360deg);                 /* 旋转到360度结束 */
+  }
+}
+
+
+/* ==================== 毛玻璃效果设置 ==================== */
+
+/* 明亮模式下的毛玻璃效果 - 为多个UI组件添加半透明磨砂玻璃效果 */
+#body-wrap #recent-posts > .recent-post-item,              /* 最近文章列表项 */
+#body-wrap .recent-post-item,                               /* 文章项目 */
+#body-wrap #aside-content .card-widget,                     /* 侧边栏卡片组件 */
+#body-wrap .layout > div:first-child:not(.recent-posts),    /* 布局主内容区域 */
+#body-wrap #nav .menus_items .menus_item .menus_item_child, /* 导航菜单下拉项 */
+#body-wrap #pagination .page-number:not(.current),          /* 分页按钮（非当前页） */
+#body-wrap #pagination .extend,                             /* 分页扩展按钮 */
+#page-header #post-info {                                   /* 文章页头部信息 */
+     /* 半透明白色背景 - 实现毛玻璃的基础透明效果 */
+     background: rgba(255, 255, 255, 0.7);                 /* 白色背景，70%不透明度，提高透明度 */
+     
+     /* 毛玻璃核心效果 - 对背景进行模糊处理 */
+     backdrop-filter: blur(2px);                             /* 标准语法：背景模糊2像素 */
+     -webkit-backdrop-filter: blur(2px);                     /* Webkit前缀：兼容Safari等 */
+     
+     /* 边框样式 - 与背景协调的边框 */
+     border: 1px solid rgba(255, 255, 255, 0.7);           /* 1像素实线边框，与背景同色系，提高透明度 */
+     
+     /* 阴影效果 - 增加立体感 */
+     box-shadow: 0 8px 16px -4px rgba(138, 138, 138, 0.15); /* 柔和阴影 */
+     
+     /* 过渡动画 - 使背景、边框、阴影变化更平滑 */
+     transition: background 0.3s ease,                       /* 背景变化0.3秒过渡 */
+                border 0.3s ease,                           /* 边框变化0.3秒过渡 */
+                box-shadow 0.3s ease;                       /* 阴影变化0.3秒过渡 */
+ }
+
+/* 分页按钮悬停效果 - 当鼠标悬停时的样式变化 */
+#body-wrap #pagination .page-number:not(.current):hover,    /* 非当前页码悬停 */
+#body-wrap #pagination .extend:hover {                     /* 分页扩展按钮悬停 */
+     /* 悬停背景色 - 使用橙色系高亮显示 */
+     background: #ff7142d2;                                 /* 橙红色背景 */
+     border-color: #ff7142d2;                               /* 橙红色边框 */
+     color: #fff;                                           /* 白色文字 */
+ }
+
+/* 夜间模式下的毛玻璃效果 - 针对深色主题的适配 */
+html[data-theme="dark"] #body-wrap #recent-posts > .recent-post-item,
+html[data-theme="dark"] #body-wrap .recent-post-item,
+html[data-theme="dark"] #body-wrap #aside-content .card-widget,
+html[data-theme="dark"] #body-wrap .layout > div:first-child:not(.recent-posts),
+html[data-theme="dark"] #body-wrap #nav .menus_items .menus_item .menus_item_child,
+html[data-theme="dark"] #body-wrap #pagination .page-number:not(.current),
+html[data-theme="dark"] #body-wrap #pagination .extend,
+html[data-theme="dark"] #page-header #post-info {
+     /* 深色半透明背景 - 适合夜间模式 */
+      background: rgba(30, 30, 30, 0.6);                    /* 深灰色背景，60%不透明度 */
+      
+      /* 细边框 - 保持轻盈感 */
+      border: 1px solid rgba(255, 255, 255, 0.08);          /* 浅白色细边框，8%不透明度 */
+      
+      /* 深色阴影 - 适应暗色环境 */
+      box-shadow: 0 8px 16px -4px rgba(0, 0, 0, 0.2);      /* 深色阴影 */
+  }
+
+/* ==================== 背景透明化设置 ==================== */
+
+/* ==================== 页脚透明化设置 ==================== */
+
+/* 设置页脚完全透明 */
+#footer {
+  background: transparent !important; /* 移除背景颜色 */
+  background-color: transparent !important; /* 确保背景色透明 */
+}
+
+/* 移除页脚遮罩层 */
+#footer:before {
+  display: none !important; /* 隐藏遮罩层 */
+}
+
+/* 如果页脚内容也需要透明或调整，可取消注释以下样式 */
+/*
+#footer > * {
+  color: inherit; /* 使用继承的颜色而不是固定的浅灰色 */
+}
+
+html[data-theme="dark"] #footer,
+html[data-theme="light"] #footer {
+  background: transparent !important;
+}
+*/
+
+/* 使页面头部背景半透明，配合毛玻璃效果，页脚保持透明 */
+#page-header.post-bg,
+#page-header.page-bg {
+     background: rgba(255, 255, 255, 0.7) !important;      /* 半透明白色背景，70%不透明度 */
+}
+
+/* 使页面头部伪元素背景也半透明，确保整体一致性 */
+#page-header.post-bg::before,
+#page-header.page-bg::before {
+     background-color: rgba(255, 255, 255, 0.7) !important; /* 伪元素半透明背景，70%不透明度 */
+}
+
+/* 夜间模式下页面头部的半透明效果，页脚保持透明 */
+html[data-theme="dark"] #page-header.post-bg,
+html[data-theme="dark"] #page-header.page-bg {
+     background: rgba(30, 30, 30, 0.6) !important;         /* 夜间模式半透明深色背景，60%不透明度 */
+}
+
+/* 夜间模式下页面头部伪元素背景半透明 */
+html[data-theme="dark"] #page-header.post-bg::before,
+html[data-theme="dark"] #page-header.page-bg::before {
+     background-color: rgba(30, 30, 30, 0.6) !important;   /* 夜间模式伪元素半透明背景，60%不透明度 */
+}
+
+/* ==================== 页脚访问量显示设置 ==================== */
+
+/* 页脚访问量统计样式 */
+#footer {
+    position: relative;                        /* 相对定位 */
+}
+
+#footer .footer-content {
+    position: relative;                        /* 相对定位，确保访问量显示在正确位置 */
+    z-index: 1;                              /* 确保内容在合适层级 */
+}
+
+/* ==================== 友链卡片背景色设置 ==================== */
+
+/* 友链卡片自定义背景色 */
+.flink-list-item[style*="--flink-bg-color"]:before {
+  background: var(--flink-bg-color) !important;
+}
+
+/* ==================== 友链头像尺寸调整 ==================== */
+
+/* 调整友链页面中头像的大小 */
+.flink .flink-item .flink-avatar {
+    width: 60px !important;
+    height: 60px !important;
+    margin: 15px 10px;
+    border-radius: 7px;
+    overflow: hidden;
+}
+
+.flink .flink-item .flink-avatar img {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover;
+}
+
+/* 如果使用的是主题默认的类名结构 */
+.flink .flink-list .flink-list-item .flink-item-icon {
+    width: 60px;
+    height: 60px;
+    margin: 15px 10px;
+    border-radius: 7px;
+    overflow: hidden;
+}
+
+.flink .flink-list .flink-list-item .flink-item-icon img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* ==================== 文章导航颜色设置 ==================== */
+
+/* 上一篇/下一篇文章导航颜色设置 - 默认透明，悬停时显示颜色 */
+#pagination.pagination-post {
+  background: transparent !important; /* 默认完全透明 */
+}
+
+/* 重写CSS变量，防止使用主题默认的悬停颜色 */
+#pagination.pagination-post {
+  --btn-hover-color: #49b1f5 !important; /* 设置悬停颜色为蓝色 */
+}
+
+#pagination.pagination-post .pagination-related {
+  background: transparent !important; /* 重置背景为透明 */
+  color: inherit !important; /* 使用继承的颜色，而不是特定颜色 */
+}
+
+#pagination.pagination-post .pagination-related:hover {
+  background: rgba(73, 177, 245, 0.7) !important; /* 悬停时背景色 */
+  color: white !important; /* 悬停时文字颜色 */
+}
+
+/* 悬停效果覆盖 */
+#pagination.pagination-post .pagination-related:not(.no-desc):hover .info-1 {
+  opacity: 0 !important;
+  transform: translate(0, -100%) !important;
+}
+
+#pagination.pagination-post .pagination-related:not(.no-desc):hover .info-2 {
+  opacity: 1 !important;
+  transform: translate(0, -50%) !important;
+}
+
+/* 夜间模式下的文章导航颜色设置 - 默认透明，悬停时显示颜色 */
+html[data-theme="dark"] #pagination.pagination-post {
+  background: transparent !important; /* 夜间模式默认完全透明 */
+}
+
+/* 夜间模式重写CSS变量 */
+html[data-theme="dark"] #pagination.pagination-post {
+  --btn-hover-color: #ff7242 !important; /* 夜间模式设置悬停颜色为橙色 */
+}
+
+html[data-theme="dark"] #pagination.pagination-post .pagination-related {
+  background: transparent !important; /* 夜间模式重置背景为透明 */
+  color: inherit !important; /* 夜间模式使用继承的颜色 */
+}
+
+html[data-theme="dark"] #pagination.pagination-post .pagination-related:hover {
+  background: rgba(255, 114, 66, 0.7) !important; /* 夜间模式悬停时背景色 */
+  color: white !important; /* 夜间模式悬停时文字颜色 */
+}
+
+/* 夜间模式悬停效果覆盖 */
+html[data-theme="dark"] #pagination.pagination-post .pagination-related:not(.no-desc):hover .info-1 {
+  opacity: 0 !important;
+  transform: translate(0, -100%) !important;
+}
+
+html[data-theme="dark"] #pagination.pagination-post .pagination-related:not(.no-desc):hover .info-2 {
+  opacity: 1 !important;
+  transform: translate(0, -50%) !important;
+}
+
+/* 页脚访问量统计容器 - 紧凑型 */
+#busuanzi-value {
+    display: inline-block;                   /* 内联块显示，节省空间 */
+    margin: 0;                               /* 重置外边距，由HTML结构控制 */
+    padding: 0.2rem 0.5rem;                  /* 内边距 */
+    font-size: 0.85rem;                      /* 更小字体 */
+    color: var(--anzhiyu-fontcolor);         /* 使用主题字体颜色变量 */
+}
+
+/* 页脚访问量统计项样式 */
+#busuanzi-value .busuanzi-item {
+    display: inline-flex;                    /* 内联弹性布局 */
+    align-items: center;                     /* 垂直居中 */
+    white-space: nowrap;                     /* 不换行 */
+    margin-right: 1rem;                      /* 项目间距 */
+}
+
+/* 页脚访问量统计图标样式 */
+#busuanzi-value .busuanzi-item i {
+    margin-right: 0.2rem;                    /* 图标右边距 */
+    font-size: 0.8rem;                      /* 更小图标 */
+}
+
+
+
+/* 版权信息用黄色 */
+#footer .copyright,
+#footer .footer-content p,
+#footer .footer-section {
+    color: rgb(251, 255, 0) !important;     /* 版权信息显示为黄色 */
+}
+
+/* 页脚引语样式 */
+#footer .footer-quote {
+    color: hotpink !important;                  /* 页脚引语显示为粉色 */
+}
+
+/* 夜间模式下页脚引语样式 */
+html[data-theme="dark"] #footer .footer-quote {
+    color: hotpink !important;               /* 夜间模式下页脚引语显示为深粉色 */
+}
+
+/* 夜间模式下版权信息黄色 */
+html[data-theme="dark"] #footer .copyright,
+html[data-theme="dark"] #footer .footer-content p,
+html[data-theme="dark"] #footer .footer-section {
+    color: rgb(251, 255, 0) !important;     /* 夜间模式下版权信息显示为黄色 */
+}
+
+/* 页脚小窝营业中文字样式 */
+#runtime {
+    color: #87CEEB !important;              /* 整体时间显示为浅蓝色 */
+}
+
+/* 夜间模式下小窝营业中文字样式 */
+html[data-theme="dark"] #runtime {
+    color: #87CEEB !important;              /* 夜间模式下也是浅蓝色 */
+}
+
+/* 夜间模式下访问量统计样式 */
+html[data-theme="dark"] #busuanzi-value {
+    color: #cccccc;                          /* 夜间模式字体颜色 */
+}
+
+
+
+/* 特定项目使用不同颜色 */
+#aside-content .card-webinfo .webinfo .webinfo-item:nth-child(1) div:last-child {
+    color: #FF6B6B !important;               /* 文章数目 - 红色 */
+}
+
+html[data-theme="dark"] #aside-content .card-webinfo .webinfo .webinfo-item:nth-child(1) div:last-child {
+    color: #FF9A9A !important;               /* 夜间模式文章数目 - 浅红色 */
+}
+
+#aside-content .card-webinfo .webinfo .webinfo-item:nth-child(2) div:last-child {
+    color: #9C51E0 !important;               /* 总字数 - 紫色 */
+}
+
+html[data-theme="dark"] #aside-content .card-webinfo .webinfo .webinfo-item:nth-child(2) div:last-child {
+    color: #C77DFF !important;               /* 夜间模式总字数 - 浅紫色 */
+}
+
+#aside-content .card-webinfo .webinfo .webinfo-item:nth-child(3) div:last-child {
+    color: #12B38B !important;               /* 访客数 - 绿色 */
+}
+
+html[data-theme="dark"] #aside-content .card-webinfo .webinfo .webinfo-item:nth-child(3) div:last-child {
+    color: #4DD091 !important;               /* 夜间模式访客数 - 浅绿色 */
+}
+
+#aside-content .card-webinfo .webinfo .webinfo-item:nth-child(4) div:last-child {
+    color: #F7C76E !important;               /* 总浏览量 - 黄色 */
+}
+
+html[data-theme="dark"] #aside-content .card-webinfo .webinfo .webinfo-item:nth-child(4) div:last-child {
+    color: #FFE5A0 !important;               /* 夜间模式总浏览量 - 浅黄色 */
+}
+
+#aside-content .card-webinfo .webinfo .webinfo-item:nth-child(5) div:last-child {
+    color: #50D6B3 !important;               /* 最后更新时间 - 青色 */
+}
+
+html[data-theme="dark"] #aside-content .card-webinfo .webinfo .webinfo-item:nth-child(5) div:last-child {
+    color: #81E6D9 !important;               /* 夜间模式最后更新时间 - 浅青色 */
+}
+
+/* 点赞按钮样式 */
+.like-button {
+  display: inline-block;
+  cursor: pointer;
+  user-select: none;
+  transition: all 0.3s ease;
+}
+
+.like-button:hover {
+  transform: scale(1.1);
+}
+
+.like-button {
+  color: #ff69b4; /* 粉色 */
+}
+
+.like-button.liked {
+  color: #ff1493; /* 深粉色 */
+}
+
+/* 点赞按钮点击动效 */
+@keyframes likeClickAnimation {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.3);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.like-clicked {
+  animation: likeClickAnimation 0.6s ease;
+}
+
+/* 社交链接中的点赞图标样式 - 使用CSS绘制的心形 */
+.card-info-social-icons .social-icon[href="javascript:void(0);"] i,
+.card-info-social-icons .social-icon[href="javascript:void(0);"] svg {
+  display: none; /* 隐藏原有的图标 */
+}
+
+/* 使用 ::before 和 ::after 伪元素创建心形图标 */
+.card-info-social-icons .social-icon[href="javascript:void(0);"] {
+  position: relative;
+  display: inline-block;
+  width: 16px; /* 减小整体宽度 */
+  height: 20px;
+}
+
+/* 左侧半心形 */
+.card-info-social-icons .social-icon[href="javascript:void(0);"]::before,
+/* 右侧半心形 */
+.card-info-social-icons .social-icon[href="javascript:void(0);"]::after {
+  content: "";
+  position: absolute;
+  width: 10px; /* 减小宽度使两半更靠近 */
+  height: 16px; /* 减小高度 */
+  background: #ff69b4; /* 粉色 */
+  border-radius: 5px 5px 0 0; /* 调整圆角 */
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+/* 左侧半心形定位和旋转 */
+.card-info-social-icons .social-icon[href="javascript:void(0);"]::before {
+  top: 4px;
+  left: 2px; /* 调整左侧位置，使两半更靠近 */
+  transform: rotate(-45deg);
+  transform-origin: 0 100%;
+}
+
+/* 右侧半心形定位和旋转 */
+.card-info-social-icons .social-icon[href="javascript:void(0);"]::after {
+  top: 4px;
+  right: 13px; /* 调整右侧位置，使两半更靠近 */
+  transform: rotate(45deg);
+  transform-origin: 100% 100%;
+}
+
+/* 悬停效果 - 左侧半心形 */
+.card-info-social-icons .social-icon[href="javascript:void(0);"]:hover::before,
+/* 悬停效果 - 右侧半心形 */
+.card-info-social-icons .social-icon[href="javascript:void(0);"]:hover::after {
+  background: #ff1493; /* 深粉色悬停效果 */
+  transform: rotate(-45deg) scale(1.2);
+}
+
+/* 悬停效果 - 右侧半心形旋转调整 */
+.card-info-social-icons .social-icon[href="javascript:void(0);"]:hover::after {
+  transform: rotate(45deg) scale(1.2);
+}
+
+/* 点赞状态 - 左侧半心形 */
+.card-info-social-icons .social-icon[href="javascript:void(0);"].liked::before,
+/* 点赞状态 - 右侧半心形 */
+.card-info-social-icons .social-icon[href="javascript:void(0);"].liked::after {
+  background: #ff1493; /* 点赞后的深粉色 */
+}
+
+.like-count {
+  margin-left: 5px;
+  font-weight: bold;
+}
+
+/* ==================== 最近文章项目透明化设置 ==================== */
+
+/* 设置最近文章项目的背景为透明，配合毛玻璃效果 */
+#body-wrap #recent-posts > .recent-post-item .recent-post-info,
+#body-wrap #recent-posts > .recent-post-item .recent-post-info::before,
+#body-wrap #recent-posts > .recent-post-item .recent-post-info::after,
+#body-wrap #recent-posts > .recent-post-item .recent-post-info > .article-title,
+#body-wrap #recent-posts > .recent-post-item .recent-post-info > .article-meta-wrap,
+#body-wrap #recent-posts > .recent-post-item .recent-post-info > .content {
+    background: transparent !important;                    /* 背景透明 */
+    background-color: transparent !important;              /* 背景色透明 */
+    box-shadow: none !important;                           /* 移除阴影 */
+}
+
+/* ==================== 文章顶部卡片设置 ==================== */
+
+/* 文章顶部信息卡片 - 居中显示在页面顶部 */
+#page-header #post-info {
+    position: absolute;                                    /* 绝对定位 */
+    bottom: 0px;                                         /* 位于页面头部底部 */
+    left: 50%;                                           /* 左边缘50%处 */
+    transform: translateX(-50%);                          /* 向左偏移自身宽度的50%，实现水平居中 */
+    margin: 0;                                           /* 无外边距 */
+    padding: 20px 40px;                                  /* 内边距：上下20px，左右40px */
+    box-sizing: border-box;                              /* 盒模型包含内边距和边框 */
+    display: block;                                      /* 块级显示 */
+    text-align: left;                                    /* 文本左对齐 */
+    border-radius: 10px;                                 /* 圆角边框 */
+}
+
+/* 移动端响应式样式 */
+@media screen and (max-width: 768px) {
+    /* 移动端文章信息卡片样式调整 */
+    #page-header #post-info {
+        padding: 15px 20px !important;                   /* 移动端内边距调整 */
+        bottom: 20px !important;                         /* 距离底部20px */
+    }
+
+    /* 移动端隐藏部分元数据 - 第一行 */
+    #post-info #post-meta > .meta-firstline > span:not(.post-meta-wordcount),
+    /* 移动端隐藏部分元数据 - 第二行 */
+    #post-info #post-meta > .meta-secondline > span:not(.post-meta-wordcount) {
+        display: none !important;                        /* 隐藏非字数统计的元数据 */
+    }
+
+    /* 移动端隐藏分隔符 - 第一行 */
+    #post-info #post-meta > .meta-firstline > .post-meta-separator,
+    /* 移动端隐藏分隔符 - 第二行 */
+    #post-info #post-meta > .meta-secondline > .post-meta-separator {
+        display: none !important;                        /* 隐藏分隔符 */
+    }
+
+    /* 移动端标题样式调整 */
+    #post-info .post-title {
+        text-align: justify !important;                  /* 两端对齐 */
+        text-align-last: left !important;                /* 最后一行左对齐 */
+        display: block;                                  /* 块级显示 */
+        margin-bottom: 10px;                             /* 底部外边距 */
+    }
+}
+
+/* ==================== 阅读模式代码块着色方案 ==================== */
+
+/* 阅读模式亮色模式全局颜色变量 */
+.read-mode:not([data-theme="dark"]) {
+    --hl-bg: #f4f7fa !important;                        /* 高亮背景色 */
+    --hltools-bg: #e9eef4 !important;                   /* 高亮工具栏背景色 */
+    --hlnumber-bg: #f4f7fa !important;                  /* 行号背景色 */
+    --hlnumber-color: #8da4bb !important;               /* 行号颜色 */
+    --hlscrollbar-bg: #dbe6f0 !important;               /* 滚动条背景色 */
+    --hlexpand-bg: linear-gradient(180deg, rgba(244,247,250,0), rgba(244,247,250,0.9)) !important; /* 展开按钮背景渐变 */
+}
+
+/* 阅读模式亮色模式代码块背景色 */
+.read-mode:not([data-theme="dark"]) #article-container .highlight table {
+    background-color: #f4f7fa !important;               /* 代码块表格背景色 */
+}
+
+/* 阅读模式亮色模式关键字着色 */
+.read-mode:not([data-theme="dark"]) .highlight .code .keyword,
+.read-mode:not([data-theme="dark"]) .highlight .code .built_in,
+.read-mode:not([data-theme="dark"]) .highlight .code .type {
+    color: #005cc5 !important;                          /* 关键字蓝色 */
+}
+
+/* 阅读模式亮色模式字符串着色 */
+.read-mode:not([data-theme="dark"]) .highlight .code .string {
+    color: #22863a !important;                          /* 字符串绿色 */
+}
+
+/* 阅读模式亮色模式注释着色 */
+.read-mode:not([data-theme="dark"]) .highlight .code .comment {
+    color: #677886 !important;                          /* 注释颜色 */
+    font-style: italic !important;                      /* 斜体显示 */
+}
+
+/* 阅读模式亮色模式数字常量着色 */
+.read-mode:not([data-theme="dark"]) .highlight .code .number {
+    color: #d130a5 !important;                          /* 数字常量红色 */
+}
+
+/* 阅读模式亮色模式函数名与类标题着色 */
+.read-mode:not([data-theme="dark"]) .highlight .code .title,
+.read-mode:not([data-theme="dark"]) .highlight .code .function {
+    color: #0077aa !important;                          /* 函数名蓝色 */
+}
+
+/* 阅读模式亮色模式预处理指令与宏定义着色 */
+.read-mode:not([data-theme="dark"]) .highlight .code .meta,
+.read-mode:not([data-theme="dark"]) .highlight .code .meta-keyword {
+    color: #8b3c9b !important;                          /* 预处理指令紫色 */
+}
+
+/* 阅读模式亮色模式局部变量与普通属性 */
+.read-mode:not([data-theme="dark"]) .highlight .code .attr,
+.read-mode:not([data-theme="dark"]) .highlight .code .variable,
+.read-mode:not([data-theme="dark"]) .highlight .code .params {
+    color: #212f3b !important;                          /* 变量颜色 */
+}
+
+/* 阅读模式夜间模式全局颜色变量 */
+.read-mode[data-theme="dark"] {
+    --hl-bg: #0b0f19 !important;                        /* 高亮背景色 */
+    --hltools-bg: #111726 !important;                   /* 高亮工具栏背景色 */
+    --hlnumber-bg: #0b0f19 !important;                  /* 行号背景色 */
+    --hlnumber-color: #5c6c7f !important;               /* 行号颜色 */
+    --hlscrollbar-bg: #1e293b !important;               /* 滚动条背景色 */
+    --hlexpand-bg: linear-gradient(180deg, rgba(11,15,25,0), rgba(11,15,25,0.9)) !important; /* 展开按钮背景渐变 */
+}
+
+/* 阅读模式夜间模式代码块背景色 */
+.read-mode[data-theme="dark"] #article-container .highlight table {
+    background-color: #0b0f19 !important;               /* 代码块表格背景色 */
+}
+
+/* 阅读模式夜间模式关键字着色 */
+.read-mode[data-theme="dark"] .highlight .code .keyword,
+.read-mode[data-theme="dark"] .highlight .code .built_in,
+.read-mode[data-theme="dark"] .highlight .code .type {
+    color: #569cd6 !important;                          /* 关键字蓝色 */
+}
+
+/* 阅读模式夜间模式字符串着色 */
+.read-mode[data-theme="dark"] .highlight .code .string {
+    color: #8fca5c !important;                          /* 字符串绿色 */
+}
+
+/* 阅读模式夜间模式注释着色 */
+.read-mode[data-theme="dark"] .highlight .code .comment {
+    color: #5c7080 !important;                          /* 注释颜色 */
+    font-style: italic !important;                      /* 斜体显示 */
+}
+
+/* 阅读模式夜间模式数字常量着色 */
+.read-mode[data-theme="dark"] .highlight .code .number {
+    color: #f07178 !important;                          /* 数字常量红色 */
+}
+
+/* 阅读模式夜间模式函数名与类标题着色 */
+.read-mode[data-theme="dark"] .highlight .code .title,
+.read-mode[data-theme="dark"] .highlight .code .function {
+    color: #82aaff !important;                          /* 函数名蓝色 */
+}
+
+/* 阅读模式夜间模式预处理指令与宏定义着色 */
+.read-mode[data-theme="dark"] .highlight .code .meta,
+.read-mode[data-theme="dark"] .highlight .code .meta-keyword {
+    color: #c792ea !important;                          /* 预处理指令紫色 */
+}
+
+/* 阅读模式夜间模式局部变量与普通属性 */
+.read-mode[data-theme="dark"] .highlight .code .attr,
+.read-mode[data-theme="dark"] .highlight .code .variable,
+.read-mode[data-theme="dark"] .highlight .code .params {
+    color: #a6bcdc !important;                          /* 变量颜色 */
+}
+
+/* ==================== 表格样式 ==================== */
+
+/* 表头居中 */
+#article-container table th,
+#article-container table thead th {
+    text-align: center !important;                      /* 表头文字居中对齐 */
+}
+
+/* ================== 亮色模式表格样式 ================== */
+/* 表格半透明 */
+html:not([data-theme="dark"]) #article-container table {
+    background-color: rgba(255, 255, 255, 0.5) !important;  /* 亮色模式表格半透明背景 */
+}
+
+/* 边框线条颜色 */
+html:not([data-theme="dark"]) #article-container table,
+html:not([data-theme="dark"]) #article-container table th,
+html:not([data-theme="dark"]) #article-container table td {
+    border-color: #919191da !important;                 /* 亮色模式边框颜色 */
+    border-width: 1px !important;                       /* 边框宽度 */
+}
+
+/* 偶数行颜色 */
+html:not([data-theme="dark"]) #article-container table tbody tr:nth-child(even) {
+    background-color: rgba(240, 244, 248, 0.5) !important;  /* 亮色模式偶数行背景色 */
+}
+
+/* ================== 夜间模式表格样式 ================== */
+/* 表格半透明 */
+html[data-theme="dark"] #article-container table {
+    background-color: rgba(22, 27, 34, 0.5) !important;     /* 夜间模式表格半透明背景 */
+}
+
+/* 边框线条颜色 */
+html[data-theme="dark"] #article-container table,
+html[data-theme="dark"] #article-container table th,
+html[data-theme="dark"] #article-container table td {
+    border-color: #5c6c7f !important;                   /* 夜间模式边框颜色 */
+    border-width: 1px !important;                       /* 边框宽度 */
+}
+
+/* 偶数行颜色 */
+html[data-theme="dark"] #article-container table tbody tr:nth-child(even) {
+    background-color: rgba(30, 36, 44, 0.5) !important;     /* 夜间模式偶数行背景色 */
+}
+
+/* ==================== 页面布局样式 ==================== */
+
+/* 无顶图页面正文标题居中 */
+#body-wrap #page .page-title {
+    text-align: center !important;                      /* 页面标题居中对齐 */
+}
+
+/* 文章排版改为两端对齐 */
+#article-container {
+    text-align: justify;                                /* 文章内容两端对齐 */
+}
+
+/* 视频自适应页面尺寸 */
+iframe[src*="youtube.com"],
+iframe[src*="youtu.be"],
+iframe[src*="vimeo.com"] {
+    display: block;                                     /* 块级显示 */
+    max-width: 100%;                                   /* 最大宽度为容器宽度 */
+    width: 100%;                                       /* 宽度占满容器 */
+    aspect-ratio: 16 / 9;                             /* 保持16:9宽高比 */
+    height: auto;                                      /* 高度自适应 */
+}
+
+/* 移动端布局调整：让侧边栏内容优先显示 */
+@media screen and (max-width: 768px) {
+    /* 调整主页内容区域的布局方向 */
+    #content-inner .layout {
+        display: flex;
+        flex-direction: column;
+    }
+    
+    /* 将侧边栏内容（博主信息、公告、最新文章、分类、归档、网站信息等）移到前面 */
+    #aside-content {
+        order: -1;
+        width: 100%;
+        margin-bottom: 20px;
+    }
+    
+    /* 确保文章列表区域在侧边栏之后 */
+    #recent-posts {
+        order: 0;
+    }
+}
+
+/* ==================== 代码块样式 ==================== */
+
+/* 亮色主题也使用暗色代码块，背景完全不透明 */
+html:not([data-theme="dark"]) #article-container .highlight,
+html:not([data-theme="dark"]) #article-container pre,
+html:not([data-theme="dark"]) #article-container code {
+    background: #1e1e1e !important;                    /* 深灰色背景，完全不透明 */
+}
+
+/* 夜间模式代码块样式保持一致 */
+html[data-theme="dark"] #article-container .highlight,
+html[data-theme="dark"] #article-container pre,
+html[data-theme="dark"] #article-container code {
+    background: #1e1e1e !important;                    /* 深灰色背景，完全不透明 */
+}
+
+/* 代码块表格背景 */
+#article-container .highlight > table,
+#article-container .highlight figcaption,
+#article-container .gist .gist-file .gist-data {
+    background: #1e1e1e !important;                     /* 深灰色背景，与代码背景一致 */
+}
+
+/* 代码块内部区域背景 */
+#article-container .highlight .code,
+#article-container .highlight .gutter {
+    background: #1e1e1e !important;                     /* 深灰色背景，与整体代码块背景一致 */
+}
+
+/* 亮色主题下使用暗色代码块的文本颜色 */
+html:not([data-theme="dark"]) #article-container .highlight .code .keyword,
+html:not([data-theme="dark"]) #article-container .highlight .code .built_in,
+html:not([data-theme="dark"]) #article-container .highlight .code .type {
+    color: #569cd6 !important;                          /* 暗色主题关键字蓝色 */
+}
+
+html:not([data-theme="dark"]) #article-container .highlight .code .string {
+    color: #8fca5c !important;                          /* 暗色主题字符串绿色 */
+}
+
+html:not([data-theme="dark"]) #article-container .highlight .code .comment {
+    color: #5c7080 !important;                          /* 暗色主题注释颜色 */
+    font-style: italic !important;                      /* 斜体显示 */
+}
+
+html:not([data-theme="dark"]) #article-container .highlight .code .number {
+    color: #f07178 !important;                          /* 暗色主题数字常量红色 */
+}
+
+html:not([data-theme="dark"]) #article-container .highlight .code .title,
+html:not([data-theme="dark"]) #article-container .highlight .code .function {
+    color: #82aaff !important;                          /* 暗色主题函数名蓝色 */
+}
+
+html:not([data-theme="dark"]) #article-container .highlight .code .meta,
+html:not([data-theme="dark"]) #article-container .highlight .code .meta-keyword {
+    color: #c792ea !important;                          /* 暗色主题预处理指令紫色 */
+}
+
+html:not([data-theme="dark"]) #article-container .highlight .code .attr,
+html:not([data-theme="dark"]) #article-container .highlight .code .variable,
+html:not([data-theme="dark"]) #article-container .highlight .code .params {
+    color: #a6bcdc !important;                          /* 暗色主题变量颜色 */
+}
